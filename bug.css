@@ -1,0 +1,19 @@
+The following CSS code snippet demonstrates an unusual issue related to unexpected behavior when using the `:not()` pseudo-class with attribute selectors within nested elements:
+
+```css
+div {
+  background-color: lightblue;
+}
+
+div[data-test="one"] div:not([data-test="two"]) {
+  background-color: lightgreen; /* This selector doesn't work as expected */
+}
+
+div[data-test="one"] div[data-test="three"] {
+  background-color: lightcoral; /* This works as expected */
+}
+```
+
+The intended behavior is that nested divs within a `div` with the attribute `data-test="one"`, that *do not* have the attribute `data-test="two"`, should have a light green background.  However, this does not occur.  The `:not()` selector seems to be ignored.
+
+The problem is that the selector is too specific and likely needs to be adjusted. The solution below details how to modify the CSS selector to correctly style the nested elements. 
