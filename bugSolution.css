@@ -1,0 +1,17 @@
+The issue arises from the specificity of the CSS selectors. The solution is to adjust the selector to be more general and account for other possible attributes:
+
+```css
+div {
+  background-color: lightblue;
+}
+
+div[data-test="one"] > div:not([data-test="two"]) {
+  background-color: lightgreen; /* Corrected selector */
+}
+
+div[data-test="one"] div[data-test="three"] {
+  background-color: lightcoral; 
+}
+```
+
+By using the child combinator `>` (direct child), we ensure that only the immediate children of `div[data-test="one"]` are targeted. This prevents unintended styling of deeply nested elements.  Removing the `>` could make the selector too general if there are multiple layers of divs.
